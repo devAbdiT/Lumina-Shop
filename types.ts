@@ -16,10 +16,10 @@ export interface CartItem extends Product {
 }
 
 export enum SortOption {
-  DEFAULT = 'default',
-  PRICE_ASC = 'price_asc',
-  PRICE_DESC = 'price_desc',
-  RATING_DESC = 'rating_desc',
+  DEFAULT = "default",
+  PRICE_ASC = "price_asc",
+  PRICE_DESC = "price_desc",
+  RATING_DESC = "rating_desc",
 }
 
 export interface FilterState {
@@ -33,11 +33,5 @@ export interface FilterState {
 export interface PaginationState {
   currentPage: number;
   itemsPerPage: number;
-  mode: 'pagination' | 'infinite-scroll';
-}
-
-export interface ChatMessage {
-  role: 'user' | 'model';
-  text: string;
-  isError?: boolean;
+  mode: "pagination" | "infinite-scroll";
 }
