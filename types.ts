@@ -35,3 +35,14 @@ export interface PaginationState {
   itemsPerPage: number;
   mode: "pagination" | "infinite-scroll";
 }
+export interface ProductState {
+  items: Product[];
+  filteredItems: Product[]; // Items after filter/sort but before pagination
+  displayedItems: Product[]; // Items currently visible (paginated or scrolled)
+  categories: string[];
+  status: "idle" | "loading" | "succeeded" | "failed";
+  error: string | null;
+  filters: FilterState;
+  pagination: PaginationState;
+  totalItems: number;
+}

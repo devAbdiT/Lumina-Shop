@@ -72,27 +72,44 @@ This structure is designed for scalability. If we were to add Auth or User Profi
 
 ```
 /
-├── components/           # The Building Blocks (View Layer)
-│   ├── Header.tsx        # Navigation, Search Bar, Global Cart Indicator
-│   ├── FilterSidebar.tsx # Controls for Redux Filtering Logic
-│   ├── ProductList.tsx   # The Grid + Infinite Scroll Trigger
-│   ├── ProductCard.tsx   # Individual Item UI
-│   ├── ProductDetail.tsx # Full page view with Gallery & Reviews
-│   └── CartPage.tsx      # Cart Management & Summary Calculation
-│
-├── services/             # The Bridge to the Outside World
-│   └── productApi.ts     # Fetches & Normalizes data from FakeStoreAPI
-│
-├── store/                # The Brain (State Layer)
-│   ├── index.ts          # Store Configuration
-│   └── slices/
-│       ├── productSlice.ts # Complex logic: Filters, Sorts, Pagination
-│       └── cartSlice.ts    # CRUD logic: Add, Remove, Update Qty, LocalStorage
-│
-├── hooks/                # Custom Tools
-│   └── useIntersectionObserver.ts # Abstracted logic for detecting scroll position
-│
-└── types.ts              # The Dictionary (Type Definitions)
+📁 Lumina Shop/
+├── 📁 components/           # Reusable UI pieces
+│   ├── FilterSidebar.tsx   # Product filters sidebar
+│   ├── Header.tsx          # Top navigation bar
+│   ├── ProductCard.tsx     # Individual product card
+│   ├── ProductList.tsx     # Grid of products
+│   └── Footer.tsx          # Bottom footer (optional)
+├── 📁 pages/               # Page components
+│   ├── HomePage.tsx        # Main home page
+│   ├── CartPage.tsx        # Shopping cart page
+│   └── ProductDetailPage.tsx # Single product page
+├── 📁 layouts/             # Page layouts
+│   └── MainLayout.tsx      # Layout with header/footer
+├── 📁 routes/              # App routing
+│   └── index.tsx           # Route definitions
+├── 📁 hooks/               # Custom hooks
+│   └── useIntersectionObserver.ts # Scroll detection
+├── 📁 services/            # API services
+│   └── productApi.ts       # Product API calls
+├── 📁 store/               # State management
+│   ├── 📁 slices/          # Redux slices
+│   │   ├── cartSlice.ts    # Cart state
+│   │   ├── productSlice.ts # Products state
+│   └── index.ts            # Store setup
+├── App.tsx                 # Main app component
+├── index.tsx               # React entry point
+├── types.ts                # TypeScript types
+├── index.html              # HTML template
+├── index.css               # Global styles
+├── vite.config.ts          # Build config
+├── tsconfig.json           # TypeScript config
+├── tailwind.config.js      # Tailwind config
+├── postcss.config.js       # PostCSS config
+├── package.json            # Dependencies
+├── package-lock.json       # Lock file
+├── .env.local              # Environment vars
+├── .gitignore              # Git ignore
+└── README.md               # Documentation
 ```
 
 ---
