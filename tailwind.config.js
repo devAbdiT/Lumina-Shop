@@ -5,10 +5,18 @@ export default {
     "./*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
-  darkMode="class",
+  darkMode: "class",
   theme: {
     extend: {
       colors: {
+        midnight: "#0A1928",
+        ice: {
+          100: "#F0F7FF", // Brightest Ice - for primary text / headings
+          200: "#E0ECF9", // Ice Blue - for secondary text
+          300: "#C2D6E8", // Soft Ice - for tertiary text
+          400: "#A3BBD4", // Muted Ice - for placeholder text / disabled
+          500: "#7F9BB8", // Gray Ice - for borders / lines
+        },
         brand: {
           50: "#f0fdfa",
           100: "#ccfbf1",
