@@ -9,7 +9,13 @@ export default {
   theme: {
     extend: {
       colors: {
-        midnight: "#0A1928",
+        midnight: {
+          950: "#030712", // Deepest Night - almost black (highest contrast)
+          900: "#0A1928", // Original Midnight - main background (your original)
+          800: "#132435", // Elevated Surface - cards, panels
+          700: "#1C2F42", // Higher Surface - modals, dropdowns
+          600: "#253A4F", // Header/Nav - stands out but still dark
+        },
         ice: {
           100: "#F0F7FF", // Brightest Ice - for primary text / headings
           200: "#E0ECF9", // Ice Blue - for secondary text
