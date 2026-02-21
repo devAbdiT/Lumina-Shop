@@ -18,7 +18,7 @@ const HomePage: React.FC = () => {
       <div className="lg:hidden mb-4">
         <button
           onClick={() => setIsMobileFiltersOpen(!isMobileFiltersOpen)}
-          className="w-full flex items-center justify-between bg-white p-4 rounded-lg shadow-sm border border-gray-200 text-gray-700 font-medium"
+          className="w-full flex items-center justify-between bg-white dark:bg-midnight-800 p-4 rounded-lg shadow-sm border border-gray-200 dark:border-midnight-700 text-gray-700 dark:text-ice-200 font-medium transition-colors"
         >
           <span className="flex items-center gap-2">
             <span className="material-icons text-brand-500">filter_list</span>
