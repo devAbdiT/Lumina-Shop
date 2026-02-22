@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import HomePage from "../pages/HomePage";
 import CartPage from "../pages/CartPage";
 import ProductDetailPage from "../pages/ProductDetail";
+import WishlistPage from "../pages/WishlistPage";
 import MainLayout from "../layouts/MainLayout";
 
 const AppRoutes: React.FC = () => {
@@ -29,6 +30,14 @@ const AppRoutes: React.FC = () => {
         element={
           <MainLayout>
             <ProductDetailPage />
+          </MainLayout>
+        }
+      />
+      <Route
+        path="/wishlist"
+        element={
+          <MainLayout>
+            <WishlistPage />
           </MainLayout>
         }
       />
