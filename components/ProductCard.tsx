@@ -1,8 +1,9 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Product } from "../types";
-import { useAppDispatch } from "../store";
+import { useAppDispatch, useAppSelector } from "../store";
 import { addToCart } from "../store/slices/cartSlice";
+import { toggleWishlist } from "../store/slices/wishlistSlice";
 
 interface Props {
   product: Product;
@@ -11,10 +12,17 @@ interface Props {
 const ProductCard: React.FC<Props> = ({ product }) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const wishlistItems = useAppSelector((state) => state.wishlist.items);
+  const isInWishlist = wishlistItems.some((item) => item.id === product.id);
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.stopPropagation(); // Prevent navigation when clicking 'Add to Cart'
     dispatch(addToCart(product));
+  };
+
+  const handleToggleWishlist = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    dispatch(toggleWishlist(product));
   };
 
   return (
@@ -26,9 +34,23 @@ const ProductCard: React.FC<Props> = ({ product }) => {
         <img
           src={product.image}
           alt={product.title}
-          className="object-contain h-full w-full group-hover:scale-110 transition-transform duration-500"
+          className="max-h-full w-auto object-contain transition-transform duration-500 group-hover:scale-110"
           loading="lazy"
         />
+        <div className="absolute top-2 left-2 z-10">
+          <button
+            onClick={handleToggleWishlist}
+            className={`p-1.5 rounded-full backdrop-blur-md transition-all duration-300 shadow-sm ${
+              isInWishlist
+                ? "bg-red-50 text-red-500 dark:bg-red-950/50"
+                : "bg-white/90 dark:bg-midnight-900/90 text-gray-400 hover:text-red-500"
+            }`}
+          >
+            <span className="material-icons text-lg">
+              {isInWishlist ? "favorite" : "favorite_border"}
+            </span>
+          </button>
+        </div>
         <div className="absolute top-2 right-2 bg-white/90 dark:bg-midnight-900/90 backdrop-blur-sm px-2 py-1 rounded text-xs font-semibold text-gray-700 dark:text-ice-200 shadow-sm">
           {product.category}
         </div>

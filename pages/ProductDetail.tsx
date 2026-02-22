@@ -2,12 +2,14 @@ import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../store";
 import { addItemsToCart } from "../store/slices/cartSlice";
+import { toggleWishlist } from "../store/slices/wishlistSlice";
 
 const ProductDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { items, status } = useAppSelector((state) => state.products);
+  const wishlistItems = useAppSelector((state) => state.wishlist.items);
 
   const [quantity, setQuantity] = useState(1);
   const [activeTab, setActiveTab] = useState<"description" | "reviews">(
@@ -16,6 +18,7 @@ const ProductDetail: React.FC = () => {
   const [isHoveringImage, setIsHoveringImage] = useState(false);
 
   const product = items.find((p) => p.id === Number(id));
+  const isInWishlist = product ? wishlistItems.some((item) => item.id === product.id) : false;
 
   // Reset quantity when product changes
   useEffect(() => {
@@ -71,7 +74,7 @@ const ProductDetail: React.FC = () => {
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 animate-fade-in-up">
+    <div className="animate-fade-in-up">
       {/* Breadcrumb */}
       <nav className="flex items-center text-sm text-gray-500 dark:text-ice-400 mb-8 overflow-x-auto whitespace-nowrap pb-2">
         <button
@@ -228,8 +231,17 @@ const ProductDetail: React.FC = () => {
               Add to Cart
             </button>
 
-            <button className="p-4 rounded-xl border-2 border-gray-200 dark:border-midnight-600 text-gray-400 dark:text-ice-500 hover:text-red-500 dark:hover:text-red-400 hover:border-red-100 dark:hover:border-red-900/30 hover:bg-red-50 dark:hover:bg-red-900/10 transition-colors">
-              <span className="material-icons">favorite_border</span>
+            <button
+              onClick={() => product && dispatch(toggleWishlist(product))}
+              className={`p-4 rounded-xl border-2 transition-colors ${
+                isInWishlist
+                  ? "border-red-100 bg-red-50 text-red-500 dark:border-red-900/30 dark:bg-red-900/10"
+                  : "border-gray-200 dark:border-midnight-600 text-gray-400 dark:text-ice-500 hover:text-red-500 hover:border-red-100 hover:bg-red-50"
+              }`}
+            >
+              <span className="material-icons">
+                {isInWishlist ? "favorite" : "favorite_border"}
+              </span>
             </button>
           </div>
 

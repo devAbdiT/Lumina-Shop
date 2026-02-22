@@ -10,7 +10,8 @@ const Header: React.FC = () => {
   const { theme, toggleTheme } = useTheme();
 
   const { searchQuery } = useAppSelector((state) => state.products.filters);
-  const cartItems = useAppSelector((state) => state.cart.items);
+  const { items: cartItems } = useAppSelector((state) => state.cart);
+  const { items: wishlistItems } = useAppSelector((state) => state.wishlist);
 
   const cartCount = cartItems.reduce((total, item) => total + item.quantity, 0);
 
@@ -56,8 +57,7 @@ const Header: React.FC = () => {
           </div>
 
           {/* Right Actions */}
-          <div className="flex items-center gap-4">
-            {/*  */}
+          <div className="flex items-center gap-2 sm:gap-4">
             <button
               onClick={toggleTheme}
               className="p-2 text-gray-500 dark:text-gray-400 hover:text-brand-600 dark:hover:text-brand-400 transition-colors hover:bg-gray-50 dark:hover:bg-gray-800 rounded-full"
@@ -67,19 +67,34 @@ const Header: React.FC = () => {
                 {theme === "light" ? "dark_mode" : "light_mode"}
               </span>
             </button>
-            <button
-              onClick={() => navigate("/cart")}
-              className="p-2 text-gray-500 hover:text-brand-600 transition-colors relative hover:bg-gray-50 rounded-full"
-              aria-label="View Cart"
+
+            <Link
+              to="/wishlist"
+              className="p-2 text-gray-500 dark:text-gray-400 hover:text-brand-600 dark:hover:text-brand-400 transition-colors hover:bg-gray-50 dark:hover:bg-gray-800 rounded-full relative"
+              aria-label="Wishlist"
             >
-              <span className="material-icons">shopping_cart</span>
-              {cartCount > 0 && (
-                <span className="absolute top-1 right-1 h-4 w-4 bg-red-500 text-white text-[10px] font-bold flex items-center justify-center rounded-full animate-pulse">
-                  {cartCount > 9 ? "9+" : cartCount}
+              <span className="material-icons">favorite_border</span>
+              {wishlistItems.length > 0 && (
+                <span className="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] font-bold h-4 w-4 flex items-center justify-center rounded-full animate-bounce">
+                  {wishlistItems.length}
                 </span>
               )}
-            </button>
-            <button className="md:hidden p-2 text-gray-500">
+            </Link>
+
+            <Link
+              to="/cart"
+              className="p-2 text-gray-500 dark:text-gray-400 hover:text-brand-600 dark:hover:text-brand-400 transition-colors hover:bg-gray-50 dark:hover:bg-gray-800 rounded-full relative"
+              aria-label="Shopping Cart"
+            >
+              <span className="material-icons">shopping_bag</span>
+              {cartItems.length > 0 && (
+                <span className="absolute -top-1 -right-1 bg-brand-600 text-white text-[10px] font-bold h-4 w-4 flex items-center justify-center rounded-full animate-bounce">
+                  {cartItems.length}
+                </span>
+              )}
+            </Link>
+
+            <button className="md:hidden p-2 text-gray-500 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-full">
               <span className="material-icons">menu</span>
             </button>
           </div>
